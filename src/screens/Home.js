@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import {  View, Text, StyleSheet, Button } from 'react-native';
+import {  View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
 import LogoTitle from '../components/LogoTitle';
 
 export default class Home extends Component {
 
     static navigationOptions = ({ navigation }) => {
+        const { navigate } = navigation;
         const { routeName } = navigation.state;
         return {
             headerTitle: <LogoTitle />,
             headerRight: (
-                <Button
-                    title='Info'
-                    onPress={() => alert('You just clicked on the Info Button!')}
-                    color='#fff' />
+                <TouchableOpacity
+                    onPress={() => alert('You just clicked on the Info Button!')} >
+                    <Text style={styles.button}> Info </Text>
+                </TouchableOpacity>
             ),
             headerLeft: (
-                <Button onPress={() => navigation.navigate('MyModal')} title='Modal' color='#fff' />
+                <TouchableOpacity onPress={() => navigate('MyModal')}>
+                    <Text style={styles.button}> Modal </Text>
+                </TouchableOpacity>
             )
         };
     };
@@ -38,5 +41,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    button: {
+        fontSize: 20,
+        color: '#fff'
     }
 });
